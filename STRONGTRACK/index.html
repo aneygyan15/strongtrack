@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101010">
+    <meta name="description" content="STRONGTRACK - Seguimiento y análisis del rendimiento deportivo">
+    <title>STRONGTRACK</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <span class="brand-icon">S</span>
+        <span>STRONG<span class="orange">TRACK</span></span>
+    </div>
+    <span class="version">V2.0</span>
+</header>
+
+<nav class="navigation">
+    <button class="nav-button active" data-section="dashboard">Dashboard</button>
+    <button class="nav-button" data-section="records">Registros</button>
+    <button class="nav-button" data-section="analysis">Análisis</button>
+    <button class="nav-button" data-section="settings">Datos</button>
+</nav>
+
+<main class="container">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page-section active">
+        <div class="welcome">
+            <p class="eyebrow">TU RENDIMIENTO, BAJO CONTROL</p>
+            <h1>Hola, atleta.</h1>
+            <p class="subtitle">Bienvenido a STRONGTRACK.</p>
+        </div>
+
+        <div class="phase-card">
+            <div>
+                <span class="phase-label">SEGUIMIENTO EXPERIMENTAL</span>
+                <h2>Control y Experimental</h2>
+                <p>Analiza y compara tu evolución.</p>
+            </div>
+            <span class="phase-icon">◉</span>
+        </div>
+
+        <div class="stats">
+            <article class="stat-card">
+                <span class="stat-icon">▤</span>
+                <p>Total de registros</p>
+                <h2 id="totalRecords">0</h2>
+                <small>Todos los registros</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">◎</span>
+                <p>Mediciones oficiales</p>
+                <h2 id="officialRecords">0</h2>
+                <small>Registros experimentales</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">↗</span>
+                <p>Entrenamientos diarios</p>
+                <h2 id="dailyRecords">0</h2>
+                <small>Sesiones registradas</small>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">◷</span>
+                <p>Último registro</p>
+                <h2 id="lastDate">--</h2>
+                <small>Fecha de actividad</small>
+            </article>
+        </div>
+
+        <div class="section-heading">
+            <div>
+                <h2>Actividad reciente</h2>
+                <p>Últimos registros guardados</p>
+            </div>
+            <button class="text-button" data-go="records">Ver todos</button>
+        </div>
+
+        <div id="recentList" class="record-list"></div>
+
+        <button class="primary-button" id="newRecordButton">
+            + Nuevo registro
+        </button>
+    </section>
+
+    <!-- REGISTROS -->
+    <section id="records" class="page-section">
+        <div class="section-heading">
+            <div>
+                <h1>Historial</h1>
+                <p>Gestiona todos tus registros.</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div>
+                <label for="filterPhase">Fase</label>
+                <select id="filterPhase">
+                    <option value="all">Todas</option>
+                    <option value="Control">Control</option>
+                    <option value="Experimental">Experimental</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="filterExercise">Ejercicio</label>
+                <select id="filterExercise">
+                    <option value="all">Todos</option>
+                    <option value="Press banca">Press banca</option>
+                    <option value="Remo polea baja">Remo polea baja</option>
+                    <option value="Leg press">Leg press</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="filterType">Tipo</label>
+                <select id="filterType">
+                    <option value="all">Todos</option>
+                    <option value="official">Oficiales</option>
+                    <option value="daily">Diarios</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="historyList" class="record-list"></div>
+    </section>
+
+    <!-- ANALISIS -->
+    <section id="analysis" class="page-section">
+        <div class="section-heading">
+            <div>
+                <h1>Análisis</h1>
+                <p>Comparación del rendimiento.</p>
+            </div>
+        </div>
+
+        <div class="analysis-controls">
+            <label for="analysisExercise">Ejercicio analizado</label>
+            <select id="analysisExercise">
+                <option value="Press banca">Press banca</option>
+                <option value="Remo polea baja">Remo polea baja</option>
+                <option value="Leg press">Leg press</option>
+            </select>
+
+            <label for="analysisType">Tipo de registro</label>
+            <select id="analysisType">
+                <option value="official">Mediciones oficiales</option>
+                <option value="daily">Entrenamientos diarios</option>
+            </select>
+        </div>
+
+        <div class="comparison-grid">
+            <article class="comparison-card">
+                <span>CONTROL</span>
+                <h2 id="controlAverage">--</h2>
+                <p>Media de repeticiones</p>
+                <small id="controlCount">0 mediciones</small>
+            </article>
+
+            <article class="comparison-card experimental">
+                <span>EXPERIMENTAL</span>
+                <h2 id="experimentalAverage">--</h2>
+                <p>Media de repeticiones</p>
+                <small id="experimentalCount">0 mediciones</small>
+            </article>
+        </div>
+
+        <div class="result-card">
+            <p class="result-label">DIFERENCIA ENTRE FASES</p>
+            <h2 id="absoluteDifference">--</h2>
+            <p id="percentageDifference">Sin datos suficientes</p>
+            <p id="analysisInterpretation" class="muted">
+                Registra mediciones en ambas fases para compararlas.
+            </p>
+        </div>
+
+        <div class="chart-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Evolución</h2>
+                    <p>Repeticiones registradas por fecha</p>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="performanceChart"></canvas>
+            </div>
+            <p id="chartMessage" class="chart-message"></p>
+        </div>
+
+        <div class="chart-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Comparación de medias</h2>
+                    <p>Promedio de cada fase</p>
+                </div>
+            </div>
+            <div class="chart-wrapper short-chart">
+                <canvas id="comparisonChart"></canvas>
+            </div>
+        </div>
+
+        <p class="method-note">
+            Nota: las diferencias observadas describen los datos registrados.
+            Por sí solas no demuestran que una intervención haya causado
+            una mejora o un descenso del rendimiento.
+        </p>
+    </section>
+
+    <!-- DATOS Y COPIAS -->
+    <section id="settings" class="page-section">
+        <div class="section-heading">
+            <div>
+                <h1>Gestión de datos</h1>
+                <p>Importa, exporta y protege tus registros.</p>
+            </div>
+        </div>
+
+        <div class="settings-card">
+            <h2>Exportar registros</h2>
+            <p>Descarga tus datos en formato CSV para abrirlos en Excel.</p>
+            <button class="primary-button" id="exportCSV">
+                Exportar CSV
+            </button>
+        </div>
+
+        <div class="settings-card">
+            <h2>Copia de seguridad</h2>
+            <p>Guarda una copia completa de tus registros en formato JSON.</p>
+            <button class="secondary-button" id="exportJSON">
+                Crear copia de seguridad
+            </button>
+        </div>
+
+        <div class="settings-card">
+            <h2>Restaurar datos</h2>
+            <p>Importa una copia JSON creada previamente con STRONGTRACK.</p>
+            <input type="file" id="importJSON" accept=".json,application/json">
+            <button class="secondary-button" id="importButton">
+                Importar copia
+            </button>
+        </div>
+
+        <div class="settings-card danger-card">
+            <h2>Eliminar todos los registros</h2>
+            <p>Esta acción elimina los datos almacenados en este navegador.</p>
+            <button class="danger-button" id="deleteAll">
+                Eliminar todos los datos
+            </button>
+        </div>
+
+        <p class="storage-note">
+            Los registros se almacenan localmente en este navegador.
+            No se sincronizan automáticamente con otros dispositivos.
+        </p>
+    </section>
+
+</main>
+
+<!-- MODAL DE REGISTRO -->
+<div class="modal hidden" id="recordModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="formTitle">Nuevo registro</h2>
+            <button type="button" class="close-button" id="closeModal">×</button>
+        </div>
+
+        <form id="recordForm">
+            <input type="hidden" id="recordId">
+
+            <label for="recordType">Tipo de registro</label>
+            <select id="recordType" required>
+                <option value="official">Medida oficial</option>
+                <option value="daily">Entrenamiento diario</option>
+            </select>
+
+            <label for="phase">Fase experimental</label>
+            <select id="phase" required>
+                <option value="Control">Control</option>
+                <option value="Experimental">Experimental</option>
+            </select>
+
+            <label for="exercise">Ejercicio</label>
+            <select id="exercise" required>
+                <option value="">Selecciona un ejercicio</option>
+                <option value="Press banca">Press banca</option>
+                <option value="Remo polea baja">Remo polea baja</option>
+                <option value="Leg press">Leg press</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <div id="otherExerciseWrapper" class="hidden">
+                <label for="otherExercise">Nombre del ejercicio</label>
+                <input type="text" id="otherExercise" maxlength="60">
+            </div>
+
+            <label for="weight">Peso utilizado (kg)</label>
+            <input type="number" id="weight" min="0" step="0.5" required>
+            <p id="fixedWeightInfo" class="field-info hidden">
+                Carga fija configurada para la medición oficial.
+            </p>
+
+            <div id="dailyFields">
+                <label for="sets">Series</label>
+                <input type="number" id="sets" min="1" max="100" value="3">
+            </div>
+
+            <label for="reps" id="repsLabel">Repeticiones al fallo</label>
+            <input type="number" id="reps" min="1" max="500" required>
+
+            <div id="officialFields">
+                <label for="sleep">Horas de sueño</label>
+                <input type="number" id="sleep" min="0" max="24" step="0.5">
+
+                <label for="energy">Nivel de energía (0-10)</label>
+                <input type="number" id="energy" min="0" max="10" step="1">
+            </div>
+
+            <label for="observations">Observaciones</label>
+            <textarea id="observations" maxlength="1000"
+                placeholder="Incidencias o comentarios..."></textarea>
+
+            <div class="form-buttons">
+                <button type="submit" class="primary-button">
+                    Guardar registro
+                </button>
+                <button type="button" class="cancel-button" id="cancelModal">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<footer>
+    STRONGTRACK © 2026 · TDR · V2.0
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
