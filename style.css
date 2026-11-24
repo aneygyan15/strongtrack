@@ -1,0 +1,664 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --orange: #ff8a24;
+    --background: #101010;
+    --card: #1b1b1b;
+    --border: #303030;
+    --muted: #999;
+    --blue: #4da6ff;
+    --green: #35c98b;
+    --red: #e85b5b;
+}
+
+body {
+    background: var(--background);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.topbar {
+    min-height: 70px;
+    padding: 0 7%;
+    border-bottom: 1px solid #292929;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.brand-icon {
+    background: var(--orange);
+    color: #111;
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-size: 20px;
+}
+
+.orange {
+    color: var(--orange);
+}
+
+.version {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border-bottom: 1px solid #292929;
+    position: sticky;
+    top: 0;
+    background: #101010;
+    z-index: 5;
+}
+
+.nav-button {
+    border: none;
+    background: transparent;
+    color: #aaa;
+    padding: 12px 18px;
+    border-radius: 8px;
+}
+
+.nav-button:hover,
+.nav-button.active {
+    background: #302013;
+    color: var(--orange);
+}
+
+.container {
+    width: min(1050px, 92%);
+    margin: 35px auto;
+}
+
+.page-section {
+    display: none;
+}
+
+.page-section.active {
+    display: block;
+}
+
+.welcome {
+    margin-bottom: 25px;
+}
+
+.eyebrow,
+.phase-label {
+    color: var(--orange);
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.welcome h1,
+.section-heading h1 {
+    font-size: 32px;
+    margin: 12px 0;
+}
+
+.subtitle,
+.phase-card p,
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.phase-card {
+    padding: 25px;
+    background: linear-gradient(110deg, #302013, #1d1d1d);
+    border: 1px solid #57351d;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phase-card h2 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.phase-icon {
+    color: var(--orange);
+    font-size: 38px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 22px 0 35px;
+}
+
+.stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 14px;
+    min-width: 0;
+}
+
+.stat-icon {
+    color: var(--orange);
+    font-size: 23px;
+}
+
+.stat-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 12px 0;
+}
+
+.stat-card h2 {
+    font-size: 27px;
+    margin-bottom: 6px;
+    overflow-wrap: anywhere;
+}
+
+.stat-card small {
+    color: #777;
+    font-size: 11px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0 16px;
+}
+
+.section-heading h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.text-button {
+    border: none;
+    background: none;
+    color: var(--orange);
+}
+
+.primary-button,
+.secondary-button,
+.danger-button,
+.cancel-button {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.primary-button {
+    background: var(--orange);
+    color: #111;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.primary-button:hover {
+    background: #ffa34f;
+}
+
+.secondary-button {
+    background: #333;
+    color: white;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.danger-button {
+    background: #512525;
+    color: #ffb0b0;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.cancel-button {
+    background: #333;
+    color: white;
+}
+
+.record-list {
+    display: grid;
+    gap: 12px;
+}
+
+.record-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 17px;
+}
+
+.record-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.record-card h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.record-card p {
+    color: #aaa;
+    font-size: 13px;
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.record-badge {
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.record-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 13px;
+}
+
+.small-button {
+    background: #303030;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+.small-button.delete {
+    color: #ffaaaa;
+}
+
+.filters,
+.analysis-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin: 20px 0;
+}
+
+.filters label,
+.analysis-controls label {
+    display: block;
+    color: #ccc;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.filters select,
+.analysis-controls select {
+    width: 100%;
+    padding: 12px;
+    background: var(--card);
+    color: white;
+    border: 1px solid #383838;
+    border-radius: 8px;
+}
+
+.analysis-controls {
+    grid-template-columns: 1fr 1fr;
+}
+
+.analysis-controls label {
+    grid-row: 1;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.comparison-card,
+.result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.comparison-card span,
+.result-label {
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.comparison-card.experimental span {
+    color: var(--blue);
+}
+
+.comparison-card h2 {
+    font-size: 30px;
+    margin: 13px 0 6px;
+}
+
+.comparison-card p,
+.comparison-card small {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.comparison-card small {
+    display: block;
+    margin-top: 9px;
+}
+
+.result-card {
+    margin-bottom: 20px;
+    background: linear-gradient(110deg, #302013, #1b1b1b);
+}
+
+.result-card h2 {
+    font-size: 32px;
+    margin: 12px 0;
+}
+
+.result-card p {
+    color: #ccc;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.result-card .muted {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.chart-card,
+.settings-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.chart-wrapper.short-chart {
+    height: 220px;
+}
+
+.chart-message {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.method-note,
+.storage-note {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.settings-card h2 {
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+.settings-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.settings-card input[type="file"] {
+    width: 100%;
+    margin-top: 15px;
+    color: #aaa;
+}
+
+.danger-card {
+    border-color: #613030;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.modal.hidden,
+.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    background: #1b1b1b;
+    border: 1px solid #444;
+    border-radius: 15px;
+    padding: 22px;
+    width: min(520px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    font-size: 21px;
+}
+
+.close-button {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 28px;
+}
+
+.modal-content label {
+    display: block;
+    color: #ccc;
+    font-size: 13px;
+    margin: 14px 0 7px;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    background: #101010;
+    color: white;
+    border: 1px solid #383838;
+    border-radius: 8px;
+}
+
+.modal-content textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.modal-content input:read-only {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.field-info {
+    color: var(--orange);
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.form-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.form-buttons .primary-button {
+    margin-top: 0;
+}
+
+.form-buttons .cancel-button {
+    margin-top: 0;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #292929;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 9px;
+    padding: 13px 18px;
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    font-size: 13px;
+    text-align: center;
+    max-width: 90%;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+footer {
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    padding: 30px;
+}
+
+@media (max-width: 800px) {
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+    .topbar {
+        padding: 0 4%;
+    }
+
+    .container {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    .navigation {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 9px 4%;
+    }
+
+    .nav-button {
+        flex-shrink: 0;
+        padding: 11px 13px;
+        font-size: 12px;
+    }
+
+    .welcome h1,
+    .section-heading h1 {
+        font-size: 27px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 14px;
+    }
+
+    .stat-card h2 {
+        font-size: 23px;
+    }
+
+    .phase-card {
+        padding: 19px;
+    }
+
+    .phase-card h2 {
+        font-size: 19px;
+    }
+
+    .filters,
+    .analysis-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-grid {
+        gap: 10px;
+    }
+
+    .comparison-card {
+        padding: 15px;
+    }
+
+    .comparison-card h2 {
+        font-size: 24px;
+    }
+
+    .chart-wrapper {
+        height: 250px;
+    }
+
+    .chart-wrapper.short-chart {
+        height: 200px;
+    }
+
+    .form-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .record-top {
+        flex-direction: column;
+    }
+}
